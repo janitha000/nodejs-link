@@ -11,11 +11,14 @@ exports.add_location = async (req, res) => {
 }
 
 exports.get_locations = async (req, res) => {
-    let filterBy = req.query.filter || '';
-    let sortBy = req.query.sort || '';
+
+    let params = {};
+    let queryParams = req.query;
+    Object.keys(queryParams).forEach((name, value) =>
+     params[name] = queryParams[name])
 
     try {
-        let locations = await repo.get_locations(filterBy, sortBy);
+        let locations = await repo.get_locations(params);
         res.send(locations);
     } catch (err) {
         res.status(500).send(err);
@@ -29,5 +32,15 @@ exports.get_by_id = async (req, res) => {
     }
     catch (err) {
         res.status(500).send(err)
+    }
+}
+
+
+exports.get_meta_data = async (req, res) => {
+    try{
+        let result = await repo.get_meta_data();
+        res.send(result);
+    } catch(err){
+        res.sendStatus(500).send(err);
     }
 }

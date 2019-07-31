@@ -1,0 +1,16 @@
+.description{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.warning {
+    background-color: coral
+}
+
+.normal {
+    background-color: darkseagreen
+}
+
+.danger {
+    background-color: crimson
+}

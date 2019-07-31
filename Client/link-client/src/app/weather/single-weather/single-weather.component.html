@@ -1,0 +1,19 @@
+<div class="row description">
+<dt class="col-sm-2">Id</dt> <dd class="col-sm-9">{{weather._id}}</dd>
+<dt class="col-sm-2">Position</dt> <dd class="col-sm-9">{{weather.position.coordinates[0]}}</dd>
+<dt class="col-sm-2"></dt> <dd class="col-sm-9">{{weather.position.coordinates[1]}}</dd>
+<dt class="col-sm-2">Elevation</dt> <dd class="col-sm-9">{{weather.elevation}}</dd>
+<dt class="col-sm-2">Call letters</dt> <dd class="col-sm-9">{{weather.callLetters}}</dd>
+<dt class="col-sm-2">Type</dt> <dd class="col-sm-9">{{weather.type}}</dd>
+<dt class="col-sm-2">Quality Control Process</dt> <dd class="col-sm-9">{{weather.qualityControlProcess}}</dd>
+<dt class="col-sm-2">Air Temperature</dt> <dd class="col-sm-9">{{weather.airTemperature.value}}</dd>
+<dt class="col-sm-2">Air Temperature Quality</dt> <dd class="col-sm-9">{{weather.airTemperature.quality}}</dd>
+<dt class="col-sm-2">Pressure</dt> <dd [ngClass]= "getPressureClass()">{{weather.pressure.value}}</dd>
+<dt class="col-sm-2">Pressure Quality</dt> <dd class="col-sm-9">{{weather.pressure.quality}}</dd>
+<dt class="col-sm-2">Wind</dt> <dd  [ngClass] = "getAirClass()">{{weather.wind.speed.rate}}</dd>
+
+
+
+
+
+</div>
