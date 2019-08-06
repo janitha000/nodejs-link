@@ -1,3 +1,12 @@
-<p>
-  link-home works!
-</p>
+<div class="row description">
+  <div class="col-sm-2">
+    <h3 class="header">Users</h3>
+    <dd *ngFor="let user of users" (click) = "onFriendClick(user)" class="col-sm-9">{{user.name}}</dd>
+  </div>
+
+  <div class="col-sm-2">
+    <h3 class="header">Companies</h3>
+    <dd *ngFor="let company of companies" (click) = "onCompanyClick(company)" class="col-sm-9">{{company}} </dd>
+  </div>
+</div>
+

@@ -10,9 +10,9 @@ exports.add_user = async (user) => {
     }
 }
 
-exports.get_users = async () => {
+exports.get_all_nodes = async () => {
     try{
-        let users = await repo.get_users();
+        let users = await repo.get_all_nodes();
         return users;
     }
     catch(err) {

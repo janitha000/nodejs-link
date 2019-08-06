@@ -9,6 +9,8 @@ import { WeatherHomeComponent } from './weather/weather-home/weather-home.compon
 import { LinkHomeComponent } from './link/link-home/link-home.component';
 import { HomeComponent } from './home/home/home.component';
 import { SingleWeatherComponent } from './weather/single-weather/single-weather.component';
+import { SingleLinkComponent } from './link/single-link/single-link.component';
+import { SingleLinkCompanyComponent } from './link/single-link-company/single-link-company.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SingleWeatherComponent } from './weather/single-weather/single-weather.
     WeatherHomeComponent,
     LinkHomeComponent,
     HomeComponent,
-    SingleWeatherComponent
+    SingleWeatherComponent,
+    SingleLinkComponent,
+    SingleLinkCompanyComponent
   ],
   imports: [
     BrowserModule,
