@@ -23,4 +23,8 @@ export class LinkService {
   getCompanyByName(name){
     return this.http.get(`http://localhost:3000/user/companies/${name}`)
   }
+
+  getLevelFriends(name, level){
+    return this.http.get(`http://localhost:3000/user/${name}?level=${level}`)
+  }
 }

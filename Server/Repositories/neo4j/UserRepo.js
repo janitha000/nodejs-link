@@ -45,8 +45,8 @@ exports.get_users = () => {
             .then(result => {
                 result.records.forEach(item => {
                     let user = {
-                        name : item._fields[0].properties.name,
-                        id : item._fields[0].identity.low
+                        name: item._fields[0].properties.name,
+                        id: item._fields[0].identity.low
                     }
                     users.push(user);
                 })
@@ -75,7 +75,7 @@ exports.get_companies = () => {
 exports.get_user_by_name = (userName) => {
     let friends = [];
     return new Promise((resolve, reject) => {
-        instance.cypher('match(:User{name:$name}) -[:FRIEND_OF] -(b) - [:EMPLOYEE_OF] -(c) return b.name, c.name', {name : userName})
+        instance.cypher('match(:User{name:$name}) -[:FRIEND_OF] -(b) - [:EMPLOYEE_OF] -(c) return b.name, c.name', { name: userName })
             .then(result => {
                 result.records.forEach(item => {
                     friends.push(item._fields);
@@ -87,16 +87,54 @@ exports.get_user_by_name = (userName) => {
     })
 }
 
-exports.get_compnay_by_name = (companyName)=> {
+exports.get_compnay_by_name = (companyName) => {
     let employees = [];
     return new Promise((resolve, reject) => {
-        instance.cypher('match(:Company{name:$name}) -[:EMPLOYEE_OF]-(b) return b.name', {name : companyName})
+        instance.cypher('match(:Company{name:$name}) -[:EMPLOYEE_OF]-(b) return b.name', { name: companyName })
             .then(result => {
                 result.records.forEach(item => {
                     employees.push(item._fields[0]);
-                    
+
                 })
                 resolve(employees);
+            }).catch(err => {
+                reject(err);
+            })
+    })
+}
+
+exports.get_firends_by_level = (username, level) => {
+    let friends = [];
+    return new Promise((resolve, reject) => {
+        let query;
+        if (level == 1) {
+            query = `match(a:User{name:$name}) - [:FRIEND_OF*${level}..${level}] -(b) -[:EMPLOYEE_OF] -(c) return distinct b.name, c.name`
+        }
+        else {
+            query = `match(a:User{name:$name}) - [:FRIEND_OF*${level}..${level}] -(b) -[:EMPLOYEE_OF] -(c) where not (a) -[:FRIEND_OF*1..1]- (b) return distinct b.name, c.name`
+        }
+        instance.cypher(query, { name: username, Level: level })
+            .then(result => {
+                result.records.forEach(item => {
+                    friends.push(item._fields);
+                    resolve(friends);
+                })
+            }).catch(err => {
+                reject(err);
+            })
+    })
+}
+
+exports.get_same_office_no_friends = (username) => {
+    let possibleFriends = [];
+    return new Promise((resolve, reject) => {
+        instance.cypher('match (a:User{name:"$name"}) - [:FRIEND_OF*2..2] -(b) - [:EMPLOYEE_OF] - (c) match(a) -[:EMPLOYEE_OF] -(d)  where d.name = c.name return b.name', {name: username})
+            .then(result => {
+                result.records.forEach(item => {
+                    possibleFriends.push(item._fields);
+                })
+                resolve(possibleFriends);
+
             }).catch(err => {
                 reject(err);
             })

@@ -20,9 +20,13 @@ export class SingleLinkCompanyComponent implements OnInit {
       this.characters = this.name.split('');
       this.characters[0] = this.name[0].toUpperCase();
       this.name = this.characters.join('');
+
       this.service.getCompanyByName(this.name).subscribe(result => {
         this.users = result;
-      })
+      });
+
+
+
     })
 
   }

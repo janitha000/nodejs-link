@@ -44,9 +44,10 @@ exports.get_companies =async  (req, res) => {
 
 exports.get_user_by_name = async (req, res) => {
     let name = req.params.name;
-    console.log(name);
+    let level = req.query.level || 1;
+    
     try{
-        let friends = await repo.get_user_by_name(name);
+        let friends = await repo.get_firends_by_level(name, level)
         res.send(friends);
     }catch(err){
         res.status(500).send(err);
@@ -62,3 +63,14 @@ exports.get_company_by_name = async (req, res) => {
         res.status(500).send(err);
     }
 }
+
+exports.get_possible_friends = async( req, res) => {
+    let name = req.params.name;
+    try{
+       let possibleFriends = await repo.get_same_office_no_friends(name);
+       res.send(possibleFriends) 
+    } catch(err){
+        res.status(500).send(err);
+    }
+}
+
