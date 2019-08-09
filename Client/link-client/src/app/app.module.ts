@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +14,9 @@ import { HomeComponent } from './home/home/home.component';
 import { SingleWeatherComponent } from './weather/single-weather/single-weather.component';
 import { SingleLinkComponent } from './link/single-link/single-link.component';
 import { SingleLinkCompanyComponent } from './link/single-link-company/single-link-company.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AuthInspector} from './interceptors/auth-inspector'
 
 @NgModule({
   declarations: [
@@ -21,14 +27,25 @@ import { SingleLinkCompanyComponent } from './link/single-link-company/single-li
     HomeComponent,
     SingleWeatherComponent,
     SingleLinkComponent,
-    SingleLinkCompanyComponent
+    SingleLinkCompanyComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000
+    })
   ],
-  providers: [],
+  providers: [ {
+    provide : HTTP_INTERCEPTORS,
+    useClass : AuthInspector,
+    multi : true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

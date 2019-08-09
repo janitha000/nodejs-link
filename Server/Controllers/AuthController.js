@@ -22,7 +22,8 @@ exports.register_user =async  (req, res) => {
         res.set('x-auth-token', token).send({
             _id : user._id,
             name : user.name,
-            email : user.email
+            email : user.email,
+            token : token
         })
     }
     catch(err){
@@ -46,7 +47,9 @@ exports.login = async (req, res) => {
         }
 
         const token = user.generateAuthToken();
-        res.set('x-auth-token', token).send();
+        res.cookie('SESSIONID', token);
+        res.set('x-auth-token', token).json(token);
 
     })
 }
+
