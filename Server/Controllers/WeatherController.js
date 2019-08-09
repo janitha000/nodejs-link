@@ -61,3 +61,13 @@ exports.get_time_by_id = async (req, res) => {
         res.setStatus(500).sed(err);
     }
 }
+
+exports.get_meta_data = async (req, res) => {
+    try{
+        let maxAir = await repo.get_meta_data();
+        res.send(maxAir)
+    }
+    catch(err){
+        res.setStatus(500).send(err.message);
+    }
+}

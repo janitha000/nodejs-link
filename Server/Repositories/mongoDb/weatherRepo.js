@@ -68,3 +68,14 @@ exports.get_time_by_id = (id) => {
         })
     })
 }
+
+exports.get_meta_data = () => {
+    return new Promise((resolve, reject) => {
+        Weather.find({}, 'position').sort('-wind.speed.rate').exec((err, result) => {
+            if(err){
+                reject(err)
+            }
+            resolve(result);
+        })
+    })
+}

@@ -8,5 +8,6 @@ router.route('/:id').get(weatherController.get_by_id)
 router.route('/elevation').get(weatherController.get_elevation);
 router.route('/test').get(weatherController.test_weather)
 router.route('/time/:id').get(weatherController.get_time_by_id);
+router.route('/metadata').get(weatherController.get_meta_data);
 
 module.exports = router;
