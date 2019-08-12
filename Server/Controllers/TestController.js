@@ -2,6 +2,8 @@ const express = require('express');
 const TestRouter = express.Router();
 const {fork, spawn, execFile} = require('child_process')
 
+const eventService = require('../Services/EventService');
+
 
 TestRouter.route('/').get((req, res) => {
     res.send('Hello from Janitha');
@@ -34,5 +36,11 @@ TestRouter.route('/execfile').get((req, res) => {
         }
     })
 })
+
+TestRouter.route('/event').get((req, res) => {
+    eventService.fire_emitter();
+    res.send('OK');
+})
+
 
 module.exports = TestRouter;
