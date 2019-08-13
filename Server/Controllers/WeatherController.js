@@ -63,11 +63,22 @@ exports.get_time_by_id = async (req, res) => {
 }
 
 exports.get_meta_data = async (req, res) => {
+    let item = req.query.item;
     try{
-        let maxAir = await repo.get_meta_data();
+        let maxAir = await repo.get_max(item);
         res.send(maxAir)
     }
     catch(err){
         res.setStatus(500).send(err.message);
+    }
+}
+
+exports.get_count = async (req, res) => {
+    try{
+        let count = await repo.get_count();
+        res.send(count)
+    }
+    catch(err){
+        res.status(500).send(err);
     }
 }

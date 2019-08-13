@@ -33,12 +33,12 @@ app.use("/auth", authRouter)
 mongoConnection.StartConnection();
 
 process.once('uncaughtException', err => {
-    console.error('Uncaught exception ' + err.stack || err);
+    console.error('Uncaught exception caught from custom handler ' + err.stack || err);
     process.exit(1);
 })
 
 process.on('uncaughtException', err => {
-    console.error('Uncaught exception ' + err.stack || err);
+    console.error('Uncaught exception caught from custom handler ' + err.stack || err);
 })
 
 

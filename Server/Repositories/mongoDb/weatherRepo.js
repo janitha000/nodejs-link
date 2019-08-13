@@ -69,13 +69,50 @@ exports.get_time_by_id = (id) => {
     })
 }
 
-exports.get_meta_data = () => {
+exports.get_max = (item) => {
     return new Promise((resolve, reject) => {
-        Weather.find({}, 'position').sort('-wind.speed.rate').exec((err, result) => {
-            if(err){
-                reject(err)
-            }
-            resolve(result);
+        if(item == 'wind'){
+            Weather.find({'wind.speed.rate' : {$ne : 999.9}}, 'wind.speed.rate').sort('-wind.speed.rate').limit(1).exec((err, result) => {
+                if(err){
+                    reject(err)
+                }
+                resolve(result);
+            })
+        }
+        else if(item == 'tempreture'){
+            Weather.find({'airTemperature.value' : {$ne : 999.9}}, 'airTemperature.value').sort('-airTemperature.value').limit(1).exec((err, result) => {
+                if(err){
+                    reject(err)
+                }
+                resolve(result);
+            })
+        }
+        else if(item == 'pressure'){
+            Weather.find({'pressure.value' : {$ne : 9999.9}}, 'pressure.value').sort('-pressure.value').limit(1).exec((err, result) => {
+                if(err){
+                    reject(err)
+                }
+                resolve(result);
+            })
+        }
+
+    })
+}
+
+exports.get_count = () => {
+    let count = 0;
+    return new Promise((resolve, reject) => {
+        const initialTime = Date.now();
+        const stream = Weather.find({}).lean().cursor();
+
+        stream.on('data', () => {
+            count +=1;
+        })
+
+        stream.on('close', () => {
+            const totalTime = Date.now() - initialTime;
+            console.log(`Total count ${count} calcalated in ${totalTime}`)
+            resolve(`Total count ${count} calcalated in ${totalTime}`);
         })
     })
 }

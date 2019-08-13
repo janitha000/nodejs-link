@@ -1,6 +1,7 @@
 const express = require('express');
 const TestRouter = express.Router();
 const {fork, spawn, execFile} = require('child_process')
+const fs = require('fs')
 
 const eventService = require('../Services/EventService');
 
@@ -40,6 +41,17 @@ TestRouter.route('/execfile').get((req, res) => {
 TestRouter.route('/event').get((req, res) => {
     eventService.fire_emitter();
     res.send('OK');
+})
+
+TestRouter.route('/image').get((req, res) => {
+    let file = fs.readFile('D:\\Singapore\\linkTest.jpg', (err, data) => {
+        res.end(data);
+    })
+})
+
+TestRouter.route('/image/stream').get((req,res) => {
+    let stream = fs.createReadStream('D:\\Singapore\\linkTest.jpg');
+    stream.pipe(res);
 })
 
 
