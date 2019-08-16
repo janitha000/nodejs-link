@@ -10,5 +10,6 @@ router.route('/test').get(weatherController.test_weather)
 router.route('/time/:id').get(weatherController.get_time_by_id);
 router.route('/metadata').get(weatherController.get_meta_data);
 router.route('/count').get(weatherController.get_count);
+router.route('/stream').get(weatherController.test_stream);
 
 module.exports = router;

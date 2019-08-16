@@ -13,15 +13,28 @@ exports.add_location = (location) => {
 }
 
 exports.get_locations = (params) => {
-    return new Promise((resolve, reject) => {
-        Location.find(params).exec((err, locations) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(locations)
-        })
+    return new Promise(async (resolve, reject) => {
+        try{
+            let locations = await  Location.find(params).populate('weather');
+            resolve(locations);
+        }
+        catch(err){
+            reject(err);
+        }
     })
 }
+
+exports.get_locations_async = async (params) => {
+    try{
+        let locations = await  Location.find(params).populate('weather', 'wind').exec();
+        return locations;
+    }
+    catch(err){
+        throw Error(err);
+    }
+}
+
+
 
 exports.get_locatoin_by_id = (id) => {
     return new Promise((resolve, reject) => {

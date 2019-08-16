@@ -18,7 +18,7 @@ exports.get_locations = async (req, res) => {
      params[name] = queryParams[name])
 
     try {
-        let locations = await repo.get_locations(params);
+        let locations = await repo.get_locations_async(params);
         res.send(locations);
     } catch (err) {
         res.status(500).send(err);

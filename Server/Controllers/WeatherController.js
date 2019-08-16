@@ -11,26 +11,26 @@ exports.get_all = async (req, res) => {
     }
 }
 
-exports.get_by_id =async (req, res) => {
+exports.get_by_id = async (req, res) => {
     let id = req.params.id;
-    try{
+    try {
         let data = await repo.get_by_id(id);
         res.send(data);
     }
-    catch(err){
+    catch (err) {
         res.status(500).send(err);
     }
 }
 
 exports.get_elevation = async (req, res) => {
     try {
-        let filter = { }
+        let filter = {}
 
         if (req.query.gt) {
-            filter = { '$gt' : parseInt(req.query.gt) }
+            filter = { '$gt': parseInt(req.query.gt) }
         }
         if (req.query.lt) {
-            filter = {'$lt' : parseInt(req.query.lt)}
+            filter = { '$lt': parseInt(req.query.lt) }
         }
 
         let result = await repo.get_elevation(filter);
@@ -42,43 +42,53 @@ exports.get_elevation = async (req, res) => {
 }
 
 exports.test_weather = async (req, res) => {
-    try{
+    try {
         let result = await repo.test_weather();
         res.send(result)
     }
-    catch(err){
+    catch (err) {
         res.status(500).send(err)
     }
 }
 
 exports.get_time_by_id = async (req, res) => {
     let id = req.params.id;
-    try{
+    try {
         let time = await repo.get_time_by_id(id);
         res.send(time);
     }
-    catch(err){
+    catch (err) {
         res.setStatus(500).sed(err);
     }
 }
 
 exports.get_meta_data = async (req, res) => {
     let item = req.query.item;
-    try{
+    try {
         let maxAir = await repo.get_max(item);
         res.send(maxAir)
     }
-    catch(err){
+    catch (err) {
         res.setStatus(500).send(err.message);
     }
 }
 
 exports.get_count = async (req, res) => {
-    try{
+    try {
         let count = await repo.get_count();
         res.send(count)
     }
-    catch(err){
+    catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+exports.test_stream = async (req, res) => {
+    try {
+        await repo.get_not_vaid_wind_speed();
+        res.send('Ok');
+    }
+    catch (err) {
         res.status(500).send(err);
     }
 }

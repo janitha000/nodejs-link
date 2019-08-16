@@ -116,3 +116,21 @@ exports.get_count = () => {
         })
     })
 }
+
+exports.get_not_vaid_wind_speed = () => {
+    return new Promise((resolve, reject) => {
+        Weather.find({'wind.speed.rate' : 999.9}, '_id').lean().stream()
+            .on('data', id => {
+                console.log(id);
+            })
+            .on('end', () => {
+                console.log('Stream ended');
+                resolve();
+            })
+            .on('error', (err)=> {
+                console.log(err);
+                reject(err);
+            })
+    })
+}
+
