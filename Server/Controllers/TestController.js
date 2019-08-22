@@ -4,6 +4,7 @@ const {fork, spawn, execFile} = require('child_process')
 const fs = require('fs')
 
 const eventService = require('../Services/EventService');
+const cryptoService = require('../Services/CryptoService');
 
 
 TestRouter.route('/').get((req, res) => {
@@ -54,5 +55,49 @@ TestRouter.route('/image/stream').get((req,res) => {
     stream.pipe(res);
 })
 
+TestRouter.route('/aes/encrypt').get(async (req, res) => {
+    try{
+        let text = req.query.text;
+        let encrypted = await cryptoService.encrypt(text);
+        res.send(encrypted);
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+
+})
+
+TestRouter.route('/aes/decrypt').get(async (req, res) => {
+    try{
+        let text = req.query.text;
+        let decrypted = await cryptoService.decrypt(text);
+        res.send(decrypted);
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+})
+
+TestRouter.route('/rsa/encrypt').get(async(req, res) => {
+    try{
+        let text = req.query.text;
+        let encrypted = await cryptoService.rsa_encrypt(text);
+        res.send(encrypted)
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+})
+
+TestRouter.route('/rsa/decrypt').get(async(req, res) => {
+    try{
+        let text = req.query.text;
+        let decrypted = await cryptoService.rsa_decrypt(text);
+        res.send(decrypted)
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+})
 
 module.exports = TestRouter;
