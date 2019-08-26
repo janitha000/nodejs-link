@@ -12,6 +12,7 @@ const UserRouter = require('./Routes/user');
 const locationRouter = require('./Routes/locations');
 const weatherRouter = require('./Routes/weather')
 const authRouter = require('./Routes/auth');
+const airBnBRouter = require('./Routes/airbnb');
 
 const logRequest = require('./Middleware/RequestLogMiddlware')
 
@@ -29,14 +30,15 @@ app.use("/Test", TestRouter);
 app.use("/User", UserRouter);
 app.use("/location", locationRouter);
 app.use("/weather", weatherRouter);
-app.use("/auth", authRouter)
+app.use("/auth", authRouter);
+app.use("/airbnb", airBnBRouter);
 
-if (process.env.NODE_ENV == 'development') {
-    mongoConnection.StartConnection();
+if (process.env.MONGO_DB == 'weather') {
+    mongoConnection.StartConnectionWeather();
 
 }
-else if(process.env.NODE_ENV == 'Test'){
-    
+else if(process.env.MONGO_DB == 'airbnb'){
+    mongoConnection.StartConnectionAirBnB();
 }
 
 process.once('uncaughtException', err => {

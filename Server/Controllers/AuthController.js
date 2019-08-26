@@ -58,5 +58,16 @@ exports.login = async (req, res) => {
 
 }
 
+exports.get_user_name = async(req, res) => {
+    let emailU = req.query.email;
+    try{
+        let userName = await User.findOne({email : emailU}, 'name').lean().exec();
+        res.send(userName);
+    }
+    catch(err){
+        res.status(500).send(err.message);
+    }
+}
+
 
 

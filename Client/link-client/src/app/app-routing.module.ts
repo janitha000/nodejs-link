@@ -9,6 +9,9 @@ import { SingleLinkComponent } from './link/single-link/single-link.component'
 import { SingleLinkCompanyComponent } from './link/single-link-company/single-link-company.component'
 import { LoginComponent } from './auth/login/login.component'
 import { RegisterComponent } from './auth/register/register.component'
+import { LocationsHomeComponent } from './airbnb/locations-home/locations-home.component'
+
+import {AuthGuardService} from './guards/auth-guard.service'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +21,8 @@ const routes: Routes = [
   { path: 'link/user/:name', component: SingleLinkComponent },
   { path: 'link/company/:name', component: SingleLinkCompanyComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'airbnb', component: LocationsHomeComponent, canActivate : [AuthGuardService] }
 
 ];
 

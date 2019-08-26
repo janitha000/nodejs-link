@@ -6,8 +6,7 @@ describe('#Testcontroller testing', function()  {
     it('respond with Hello from Janitha', function(done)  {
         request(server).get('/test/')    
             .end((err, res) => {
-                expect(res.status).to.equal(200);
-                
+                expect(res.status).to.equal(200);                
             })
             done();
     })

@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         req.user = result;
         next();
     }).catch(err => {
-        res.status(400).send('Access Denied. Invalid token');
+        res.status(401).send('Access Denied. Invalid token');
     })
 
     // jwt.verify(token, config.get("privateKey"), (err, decoded) => {

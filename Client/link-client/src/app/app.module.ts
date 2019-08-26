@@ -4,6 +4,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';  
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +19,8 @@ import { SingleLinkComponent } from './link/single-link/single-link.component';
 import { SingleLinkCompanyComponent } from './link/single-link-company/single-link-company.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
-import {AuthInspector} from './interceptors/auth-inspector'
+import {AuthInspector} from './interceptors/auth-inspector';
+import { LocationsHomeComponent } from './airbnb/locations-home/locations-home.component'
 
 @NgModule({
   declarations: [
@@ -29,13 +33,15 @@ import {AuthInspector} from './interceptors/auth-inspector'
     SingleLinkComponent,
     SingleLinkCompanyComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LocationsHomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000
