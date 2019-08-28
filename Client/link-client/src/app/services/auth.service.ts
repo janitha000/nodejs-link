@@ -31,23 +31,22 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    console.log('Setting isLoggedIn to false')
     this.isLoggedIn.next(false);
     this.router.navigate(['/']);
   }
 
-  isLoggedin(){
 
-    return this.isLoggedIn.asObservable();
-  }
 
-  setLoggedin(email){
-    console.log('Setting loggedin to true');
+  setLoggedin(){
     this.isLoggedIn.next(true);
   }
 
   getUserName (email) {
     return this.http.get<any>(`http://localhost:3000/auth/user?email=${email}`)
+  }
+
+  isLoggedin(){
+    return this.isLoggedIn.asObservable();
   }
 
   UseName(){
@@ -56,13 +55,11 @@ export class AuthService {
 
   checkUserName(){
     let name = localStorage.getItem('username');
-    console.log(name)
     return name;
   }
 
   checkTokenAvailable() {
     let token = localStorage.getItem('token');
-    console.log(token)
     return token != null;
   }
 }

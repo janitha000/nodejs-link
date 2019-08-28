@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(loginDetails).subscribe(token => {
       this.authService.getUserName(loginDetails.email).subscribe(data => {
         this.authService.setSession(token, data.name);
-        this.authService.setLoggedin(loginDetails.email);
+        this.authService.setLoggedin();
         this.location.back();   
       })
            

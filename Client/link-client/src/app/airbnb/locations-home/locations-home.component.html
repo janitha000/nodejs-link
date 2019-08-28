@@ -3,27 +3,55 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Top locations by review score</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text"><b>Name</b></p></div>
+          <div class="col-sm-4"><p class="card-text"><b>Description</b></p></div>
+          <div class="col-sm-2"><p class="card-text"><b>Score</b></p></div>
+        </div>
+        <div class="row" *ngFor ='let location of TopLocations'>
+          <div class="col-sm-6"><p class="card-text">{{location.name}}</p></div>
+          <div class="col-sm-4"><p class="card-text">{{location.property_type}}</p></div>
+          <div class="col-sm-2"><p class="card-text">{{location.review_scores.review_scores_value}}</p></div>
+        </div>
+        <a href="#" class="btn btn-primary">View more</a>
       </div>
     </div>
   </div>
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">Top locations with 10 review</h5>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text"><b>Name</b></p></div>
+          <div class="col-sm-4"><p class="card-text"><b>Description</b></p></div>
+          <div class="col-sm-2"><p class="card-text"><b>Score</b></p></div>
+        </div>
+        <div class="row" *ngFor ='let location of TenLocations'>
+          <div class="col-sm-6"><p class="card-text">{{location.name}}</p></div>
+          <div class="col-sm-4"><p class="card-text">{{location.property_type}}</p></div>
+          <div class="col-sm-2"><p class="card-text">{{location.review_scores.review_scores_value}}</p></div>
+        </div>
+        <a href="#" class="btn btn-primary">View more</a>
       </div>
     </div>
   </div>
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">Top locations with 9 review</h5>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text"><b>Name</b></p></div>
+          <div class="col-sm-4"><p class="card-text"><b>Description</b></p></div>
+          <div class="col-sm-2"><p class="card-text"><b>Score</b></p></div>
+        </div>
+        <div class="row" *ngFor ='let location of NineLocations'>
+          <div class="col-sm-6"><p class="card-text">{{location.name}}</p></div>
+          <div class="col-sm-4"><p class="card-text">{{location.property_type}}</p></div>
+          <div class="col-sm-2"><p class="card-text">{{location.review_scores.review_scores_value}}</p></div>
+        </div>
+        <a href="#" class="btn btn-primary">View more</a>
       </div>
     </div>
   </div>
 </div>
+

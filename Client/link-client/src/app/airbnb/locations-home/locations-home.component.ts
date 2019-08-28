@@ -11,18 +11,30 @@ import {Router } from '@angular/router'
 export class LocationsHomeComponent implements OnInit {
 
   TopLocations : any;
+  TenLocations: any;
+  NineLocations : any;
+
   constructor(private service : AirbnbService, private location : Location, private router : Router) { }
 
   ngOnInit() {
     this.service.getTopReviewLocations().subscribe(result => {
       this.TopLocations = result;
-      console.log(result);
     }, error => {
-      if(error.status == 401){
-      // this.router.navigate(['/login']);
-      }
       console.log(error.status);
     })
+
+    this.service.get10ReviewLocations().subscribe(result => {
+      this.TenLocations = result;
+    }, error => {
+      console.log(error.status);
+    })
+
+    this.service.get9ReviewLocations().subscribe(result => {
+      this.NineLocations = result;
+    }, error => {
+      console.log(error.status);
+    })
+
   }
 
 }

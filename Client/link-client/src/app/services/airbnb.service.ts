@@ -12,4 +12,14 @@ export class AirbnbService {
     const params = new HttpParams().set('score', 'top');
     return this.http.get('http://localhost:3000/airbnb/review', {params});
   }
+
+  get10ReviewLocations () {
+    const params = new HttpParams().set('score', '10');
+    return this.http.get('http://localhost:3000/airbnb/review', {params})
+  }
+
+  get9ReviewLocations() {
+    const params = new HttpParams().set('score', '9');
+    return this.http.get('http://localhost:3000/airbnb/review', {params});
+  }
 }
