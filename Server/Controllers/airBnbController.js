@@ -19,7 +19,7 @@ exports.get_location = async (req, res) => {
 
 exports.get_by_review_score = async (req, res) => {
     try{
-        let score = req.query.score;
+        const score= req.query.score;
 
         let locations = await repo.get_by_review_score(score);
         res.send(locations);

@@ -9,3 +9,6 @@ module.exports. levelschema = {
     level: joi.number().min(0).max(2).required()
 }
 
+module.exports.review = {
+    score : joi.string().required().valid('top','9','10')
+}
